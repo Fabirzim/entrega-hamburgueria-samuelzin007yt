@@ -1,50 +1,48 @@
-.overlayBox {
+.cardlist {
+    background-color: transparent;
+    overflow: scroll;
+    display: flex;
     position: fixed;
     inset: 0;
     width: 100%;
     height: 100vh;
-    background-color: transparent;
-    overflow: scroll;
-
-    display: flex;
     align-items: center;
     justify-content: center;
 
-        .modalBox {
+        .cardModal {
+            background-color: var(--color-gray-0);
             width: 30rem;
             height: 100vh;
-	        background-color: var(--color-primary);
 
             h2 {
-                background-color: var(--color-primary);
+                background-color: var(--color-gray-0);
             }
         }
 
-    .div__cart {
+    .cardTitle {
         display: flex;
+        background: var(--color-primary);
         justify-content: space-between;
-        background: var(--color-secundary);
         padding: 16px;
 
         h2 {
-            background: var(--color-secundary);
-            color: var(--color-primary);
+            background: var(--color-primary);
+            color: var(--color-gray-0);
         }
 
         button {
-            background: var(--color-secundary);
-            color: rgb(50%, 50%, 50%);
+            background: var(--color-primary);
             border: none;
         }
     }
 
-    .div__desc {
+    .titleValue {
         display: flex;
+        gap: 20px;
+        border-top: 2px solid var(--color-gray-100);
         flex-direction: column;
         padding: 1rem;
-        gap: 20px;
-        border-top: 2px solid var(--gray-100);
-        background-color: var(--color-primary);
+        background-color: var(--color-gray-0);
 
         div {
             display: flex;
@@ -52,16 +50,16 @@
 
         }
         button {
+            border-radius: 8px;
+            height: 2.5rem;
             color: var(--color-primary);
             background-color: var(--background-primary);
             border: 2px;
-            border-radius: 8px;
-            height: 2.5rem;
         }
     }
 
-    .ul__cart {
-        background-color: var(--color-primary);
+    .cardProduct {
+        background-color: var(--color-gray-0);
     }
 }
 

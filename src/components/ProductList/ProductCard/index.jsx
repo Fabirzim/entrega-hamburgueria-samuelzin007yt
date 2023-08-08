@@ -1,39 +1,38 @@
 import { toast } from "react-toastify";
-import styles from "./products.module.scss";
+import styles from "./styles.module.scss";
 
 export const ProductCard = ({
   product,
-  setIsVisible,
+  setCard,
   cartList,
   setCartList,
 }) => {
-  const addProduct = () => {
-    let includes = false;
+  const products = () => {
+    let productSum = false;
 
     for (let i = 0; i < cartList.length; i++) {
       if (cartList[i].id === product.id) {
-        includes = true;
+        productSum = true;
       }
     }
-    if (includes) {
-      toast("O item já está no carrinho")
-      // alert("O item já está no carrinho");
+    if (productSum) {
+      toast("Produto adicionado ao carrinho")
     } else {
       setCartList([...cartList, {...product }]);
-      toast("Item adicionado com sucesso")
-      localStorage.setItem("@cartList", JSON.stringify(cartList));
+      toast("Produto adicionado")
+      localStorage.setItem("@cardRender", JSON.stringify(cartList));
     }
   };
 
   return (
-    <li className={styles.list__products}>
-      <div className={styles.div__img}>
+    <li className={styles.productList}>
+      <div className={styles.img}>
         <img src={product.img} alt={product.name} />
       </div>
-      <div className={styles.div__description}>
+      <div className={styles.listProducts}>
         <h3>{product.name}</h3>
-        <span className={styles.span__category}>{product.category}</span>
-        <span className={styles.span__value}>
+        <span className={styles.category}>{product.category}</span>
+        <span className={styles.valueTitle}>
           {product.price.toLocaleString("pt-BR", {
             style: "currency",
             currency: "BRL",
@@ -41,7 +40,7 @@ export const ProductCard = ({
         </span>
         <button
           onClick={() => {
-            addProduct()
+            products()
           }}
         >
           Adicionar

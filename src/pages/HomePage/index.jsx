@@ -2,35 +2,34 @@ import { useState } from "react";
 import { CartModal } from "../../components/CartModal";
 import { Header } from "../../components/Header";
 import { ProductList } from "../../components/ProductList";
-import listProducts from "../../services/api";
+import {apiList} from "../../services/api";
 import { useEffect } from "react";
-import styles from "./homepages.module.scss";
+import styles from "./styles.module.scss";
 
 export const HomePage = () => {
   const [productList, setProductList] = useState([]);
-  const [cartList, setCartList] = useState([]);
-  const [isVisible, setIsVisible] = useState(false);
-  const [search, setSearch] = useState("");
   const [value, setValue] = useState("");
+  const [search, setSearch] = useState("");
+  const [cartList, setCartList] = useState([]);
+  const [sumValue, setCard] = useState(false);
 
   useEffect(() => {
-    const getProductsList = async () => {
+    const renderProducts = async () => {
       try {
-        const { data } = await listProducts.get("/products");
+        const { data } = await apiList.get("/products");
         setProductList(data);
       } catch (error) {
         console.log(error);
       }
     };
-    getProductsList();
+    renderProducts();
   }, []);
 
-  // filtro de pesquisa
   const productsResults = productList.filter((product) =>
     product.name.toLowerCase().includes(search.toLowerCase())
   );
 
-  const renderListSearch = search ? productsResults : productList;
+  const products = search ? productsResults : productList;
 
   return (
     <>
@@ -40,19 +39,19 @@ export const HomePage = () => {
         setSearch={setSearch}
         setValue={setValue}
         cartList={cartList}
-        setIsVisible={setIsVisible}
+        setCard={setCard}
       />
       <main className={styles.main}>
         <ProductList
           productList={productList}
-          setIsVisible={setIsVisible}
+          setCard={setCard}
           cartList={cartList}
           setCartList={setCartList}
-          renderListSearch={renderListSearch}
+          products={products}
         />
-        {isVisible ? (
+        {sumValue ? (
           <CartModal cartList={cartList} 
-          setIsVisible={setIsVisible}
+          setCard={setCard}
           setCartList={setCartList}
            />
         ) : null}

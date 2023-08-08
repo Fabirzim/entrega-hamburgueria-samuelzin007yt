@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Logo from "../../assets/Logo.svg";
+import Logo from "../../assets/logo.png";
 import { MdSearch, MdShoppingCart } from "react-icons/md";
-import styles from "../Header/header.module.scss"
+import styles from "../Header/styles.module.scss"
 
-export const Header = ({  value, setValue, setSearch, cartList, setIsVisible }) => {
+export const Header = ({ setSearch, cartList, setCard ,value, setValue }) => {
 
    const submit = (e) => {
       e.preventDefault();
@@ -12,11 +12,11 @@ export const Header = ({  value, setValue, setSearch, cartList, setIsVisible }) 
    }
 
    return (
-      <header className={styles.header__componet}>
-         <img src={Logo} alt="Logo Kenzie Burguer" />
-         <div className={styles.div__main}>
+      <header className={styles.headerLogo}>
+         <img src={Logo} alt="Kenzie Burguer" />
+         <div className={styles.btn}>
             <button onClick={() => {
-            setIsVisible(true);
+            setCard(true);
           }}>
                 <MdShoppingCart size={21} />
                 <span>{cartList.length}</span>
@@ -30,7 +30,7 @@ export const Header = ({  value, setValue, setSearch, cartList, setIsVisible }) 
                   required
                />
 
-               <div className={styles.div__button}>
+               <div className={styles.btnChange}>
                   <button type="submit">
                      <MdSearch size={21} />
                   </button>

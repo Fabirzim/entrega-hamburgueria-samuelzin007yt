@@ -3,9 +3,6 @@
     padding: 0;
 }
 
-ul, ol{
-    list-style: none;
-}
 
 button {
     cursor: pointer;
@@ -13,4 +10,7 @@ button {
 
 input, select, textarea {
     background: transparent;
+}
+ul, ol{
+    list-style: none;
 }

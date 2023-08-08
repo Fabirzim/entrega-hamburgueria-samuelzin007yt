@@ -1,28 +1,28 @@
 import { MdClose } from "react-icons/md";
-import { CartItemCard } from "./CartItemCard";
+import { CreateCard } from "./CreateCard";
 import styles from "./modal.module.scss";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 
-export const CartModal = ({ cartList, setIsVisible, setCartList }) => {
-  const total = cartList.reduce((prevValue, product) => {
-    return prevValue + product.price;
+export const CartModal = ({ setCard, setCartList, cartList }) => {
+  const render = cartList.reduce((sum, product) => {
+    return sum + product.price;
   }, 0);
 
   useEffect(() => {
-    const savedCartList = JSON.parse(localStorage.getItem("@cartList"));
-    if (savedCartList) {
-      setCartList(savedCartList);
+    const renderCard = JSON.parse(localStorage.getItem("@cardRender"));
+    if (renderCard) {
+      setCartList(renderCard);
     }
   }, [setCartList]);
 
   return (
-    <div role="dialog" className={styles.overlayBox}>
-      <div className={styles.modalBox}>
-        <div className={styles.div__cart}>
+    <div role="dialog" className={styles.cardlist}>
+      <div className={styles.cardModal}>
+        <div className={styles.cardTitle}>
           <h2>Carrinho de compras</h2>
           <button
-            onClick={() => setIsVisible(false)}
+            onClick={() => setCard(false)}
             aria-label="close"
             title="Fechar"
           >
@@ -30,9 +30,9 @@ export const CartModal = ({ cartList, setIsVisible, setCartList }) => {
           </button>
         </div>
         <div>
-          <ul className={styles.ul__cart}>
+          <ul className={styles.cardProduct}>
             {cartList.map((product) => (
-              <CartItemCard
+              <CreateCard
                 key={product.id}
                 product={product}
                 cartList={cartList}
@@ -41,11 +41,11 @@ export const CartModal = ({ cartList, setIsVisible, setCartList }) => {
             ))}
           </ul>
         </div>
-        <div className={styles.div__desc}>
+        <div className={styles.titleValue}>
           <div>
             <span>Total</span>
             <span>
-              {total.toLocaleString("pt-BR", {
+              {render.toLocaleString("pt-BR", {
                 style: "currency",
                 currency: "BRL",
               })}

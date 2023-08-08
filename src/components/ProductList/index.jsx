@@ -1,15 +1,15 @@
 import { ProductCard } from "./ProductCard";
-import styles from "./containerproducts.module.scss";
+import styles from "./styles.module.scss";
 
-export const ProductList = ({ setIsVisible, renderListSearch, cartList, setCartList}) => {
+export const ProductList = ({ products, cartList, setCard, setCartList}) => {
    return (
       <ul className={styles.container}>
-         {renderListSearch.map((product) => (
+         {products.map((product) => (
             <ProductCard key={product.id} product={product}
             cartList={cartList}
             setCartList={setCartList}
-            setIsVisible={setIsVisible} 
-            renderListSearch={renderListSearch}/>
+            setCard={setCard} 
+            products={products}/>
          ))}
       </ul>
    );
